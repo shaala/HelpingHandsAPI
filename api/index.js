@@ -31,6 +31,25 @@ server.route( [
         path: '/api/events',
         config: {json: {space: 2}},
         handler: function(request, reply) {
+            rep('events');
+            var findObject = {};
+            for (var key in request.query) {
+                findObject[key] = request.query[key]
+            }
+            collection.find(findObject).toArray(function(error, events) {
+                assert.equal(null,error);
+                reply(events);
+            })
+        }
+    },
+    // Get categories 
+    {
+        method: 'GET',
+        path: '/api/cats',
+        config: {json: {space: 2}},
+        handler: function(request, reply) {
+            // set to appropriate collection
+            rep('categories');
             var findObject = {};
             for (var key in request.query) {
                 findObject[key] = request.query[key]
@@ -46,18 +65,20 @@ server.route( [
         method: 'POST',
         path: '/api/events',
         handler: function(request, reply) {
+            rep('events');
             collection.insertOne(request.payload, function(error, result) {
                 assert.equal(null,error);
                 reply(request.payload);
             })
         }
     },
-    // Get 
+    // Get w search param
     {
         method: 'GET',
         path: '/api/events/{name}',
         config: {json: {space: 2}},
         handler: function(request, reply) {
+            rep('events');
             collection.findOne({"title":request.params.name}, function(error, event) {
                assert.equal(null,error);
                reply(event);
@@ -96,6 +117,7 @@ server.route( [
          method: 'DELETE',
          path: '/api/events/{id}',
          handler: function(request, reply) {
+            rep('events');
              let item = request.params.id
              collection.deleteOne({_id: mongodb.ObjectID(item)},
                  function(error, results) {
@@ -108,16 +130,19 @@ server.route( [
         method: 'GET',
         path: '/',
         handler: function(request, reply) {
+            rep('events');
             reply("API for RSRC")
         }
     }
 ]);
 
-MongoClient.connect(url, function(err, db) {
-    assert.equal(null,err);
-    console.log("connected to server all bueno");
-    collection = db.collection('events');
-    server.start(function(err) {
-        console.log('Hapi is listening to http://localhost:8080')
-    })
-});
+function rep (col) {
+    MongoClient.connect(url, function(err, db) {
+        assert.equal(null,err);
+        console.log("connected to server all bueno");
+        collection = db.collection(col);
+        server.start(function(err) {
+            console.log('Hapi is listening to http://localhost:8080')
+        })
+    });
+}
