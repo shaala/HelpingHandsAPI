@@ -1,0 +1,31 @@
+{
+  "name": "doneapprestapi",
+  "version": "1.0.0",
+  "description": "restful done app",
+  "main": "104.198.103.85",
+  "scripts": {
+    "test": "\"echo \\\""
+    "start":"nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChristaFox/RESTfulAPIDone.git"
+  },
+  "keywords": [
+    "\"restful\"",
+    "\"API\"",
+    "\"Done\""
+  ],
+  "author": "christa fox",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ChristaFox/RESTfulAPIDone/issues"
+  },
+  "homepage": "https://github.com/ChristaFox/RESTfulAPIDone#readme",
+  "devDependencies": {
+    "nodemon": "^1.12.1"
+  },
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
