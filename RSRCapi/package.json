@@ -1,27 +1,27 @@
 {
-  "name": "doneapprestapi",
+  "name": "RSRCapi",
   "version": "1.0.0",
-  "description": "restful done app",
-  "main": "104.198.103.85",
+  "description": "RSRC API",
+  "main": "index.js",
   "scripts": {
     "test": "\"echo \\\""
     "start":"nodemon server.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ChristaFox/RESTfulAPIDone.git"
+    "url": "git+https://github.com/shaala/HelpingHandsAPI/branches"
   },
   "keywords": [
     "\"restful\"",
     "\"API\"",
-    "\"Done\""
+    "\"RSRC\""
   ],
   "author": "christa fox",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ChristaFox/RESTfulAPIDone/issues"
+    "url": "https://github.com/shaala/HelpingHandsAPI/issues"
   },
-  "homepage": "https://github.com/ChristaFox/RESTfulAPIDone#readme",
+  "homepage": "https://github.com/shaala/HelpingHandsAPI/blob/master/README.md",
   "devDependencies": {
     "nodemon": "^1.12.1"
   },
