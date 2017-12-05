@@ -4,7 +4,7 @@
   "description": "restful done app",
   "main": "104.198.103.85",
   "scripts": {
-    "test": "\"echo \\\""
+    "test": "\"echo \\\"",
     "start":"nodemon server.js"
   },
   "repository": {
