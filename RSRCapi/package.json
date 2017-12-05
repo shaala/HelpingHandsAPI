@@ -4,8 +4,8 @@
   "description": "restful done app",
   "main": "104.198.103.85",
   "scripts": {
-    "test": "\"echo \\\""
-    "start":"nodemon server.js"
+    "test": "\"echo \\\"",
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -26,6 +26,7 @@
     "nodemon": "^1.12.1"
   },
   "dependencies": {
-    "express": "^4.16.2"
+    "express": "^4.16.2",
+    "mongoose": "^4.13.6"
   }
 }
