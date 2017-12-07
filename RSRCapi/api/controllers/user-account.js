@@ -1,3 +1,4 @@
+import { Router, Request, Response, NextFunction } from 'express';
 var AccountController = function (userModel, session, mailer) {
 		this.crypto = require('crypto');
 		this.uuid = require('node-uuid');
@@ -64,12 +65,14 @@ AccountController.prototype.logoff = function () {
 			return;
 };
 
-AccountController.prototype.register = function (newUser, callback) {
+AccountController.prototype.register = function (req, res, next) {
     var me = this;
     me.userModel.findOne({ email: newUser.email }, function (err, user) {
 
         if (err) {
-            return callback(err, new me.ApiResponse({ success: false, extras: { msg: me.ApiMessages.DB_ERROR } }));
+            // return callback(err, new me.ApiResponse({ success: false, extras: { msg: me.ApiMessages.DB_ERROR } }));
+						//TODO:can't have returns need to replace with respond json
+						res.json({statusCode: 500, success: false, extras: { msg: me.ApiMessages.DB_ERROR }})
         }
 
         if (user) {
@@ -157,4 +160,6 @@ AccountController.prototype.resetPasswordFinal = function (email, newPassword, p
             }
         });
     });
+
+
 };
