@@ -1,25 +1,47 @@
-var express = require('express'),
-  app = express(),
+const express = require('express');
+const router = express.Router();
+const app = express();
+const mongoose = require('mongoose');
+const config = require('./config');
+const bodyParser = require('body-parser');
 
-  port = process.env.PORT || 8100,
+const port = process.env.PORT || 8100;
 
- //  app.listen(port);
- //   Task = require('./api/models/rsrcModel'), //created model loading here
- //   bodyParser = require('body-parser');
- //
- // // mongoose instance connection url connection
- // mysql.Promise = global.Promise;
- // mysql.connect('104.198.103.85');
- //
- //
- // app.use(bodyParser.urlencoded({ extended: true }));
- // app.use(bodyParser.json());
- //
- //
- // var routes = require('./api/routes/doneRoutes'); //importing route
- // routes(app); //register the route
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+// CONNECT TO DATABASE
+mongoose.Promise = global.Promise;
+mongoose.connect(config.database, (err) => {
+  useMongoClient: true;
+  if (err) {
+    console.log('Could NOT connect to database: ', err);
+  } else {
+    console.log('Connected to database: ' + 'rsrc');
+  }
+});
+app.set('superSecret', config.secret);
+
+// API ROUTING
+// middleware to use for all requests
+app.use(function (req, res, next) {
+  console.log('using router');
+  next();
+});
+
+// Test route
+router.get('/', function (req, res) {
+  res.json({ message: 'api works!' });
+});
+
+// Prefix routes with /api
+app.use('/api', router);
+
+// var routes = require('./api/routes/doneRoutes'); //importing route
+// routes(app); //register the route
 
 
- app.listen(port);
-
-console.log('Done RESTful API server started on: ' + port);
+// START THE SERVER
+app.listen(port, () => {
+  console.log('Listening on port ' + port);
+});

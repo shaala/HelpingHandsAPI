@@ -7,7 +7,12 @@ var UserSchema = new Schema({
     firstName: String,
     lastName: String,
     passwordHash: String,
-    passwordSalt: String
+    passwordSalt: String,
+    street address: String,
+    city: String,
+    state: String,
+    zip: Number,
+    phone-num: Number
 });
 
 module.exports = mongoose.model('User', UserSchema);
