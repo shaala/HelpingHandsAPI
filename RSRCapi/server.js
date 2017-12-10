@@ -46,6 +46,24 @@ app.listen(port, () => {
   console.log('Listening on port ' + port);
 });
 
+var Org = require('./api/models/org.js');
 
 //organization route
+router.route('/organization');
 
+  //create an organization 
+  .post(function(req, res) {
+    var org = new Org();
+    org.name = req.body.name;
+
+    //save org and err check
+    org.save(function(err) {
+      if (err)
+          res.send(err);
+
+      res.json({ message: 'organization created!'});
+    });
+    
+  });
+
+  
