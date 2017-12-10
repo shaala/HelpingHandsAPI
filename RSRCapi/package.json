@@ -26,7 +26,8 @@
     "nodemon": "^1.12.1"
   },
   "dependencies": {
-    "express": "^4.16.2",
-    "mongoose": "^4.13.6"
+    "express": "*",
+    "mongoose": "*",
+    "body-parser": "*"
   }
 }
