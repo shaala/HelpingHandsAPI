@@ -4,13 +4,22 @@ var AccountController = function (userModel, session, mailer) {
 		this.uuid = require('node-uuid');
 		this.ApiResponse = require('../models/api-response.js');
 		this.ApiMessages = require('../models/api-messages.js');
-		this.UserProfileModel = require('../models/user-profile.js');
+		this.UserProfileModel = require('../models/user.js');
 		this.userModel = userModel;
 		this.session = session;
 		this.mailer = mailer;
 };
 
 module.exports = AccountController;
+
+exports.userList = function(req, User.find({}, function(err, task){
+		if (err)
+			res.send(err);
+		res.json(user);
+	});
+};
+
+//TODO exports.create_user = 
 
 AccountController.prototype.getSession = function () {
 		return this.session;
