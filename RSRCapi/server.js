@@ -52,7 +52,7 @@ var Org = require('./api/models/org.js');
 router.route('/organization');
 
   //create an organization 
-  .post(function(req, res) {
+  app.post(function(req, res) {
     var org = new Org();
     org.name = req.body.name;
 
@@ -65,5 +65,7 @@ router.route('/organization');
     });
     
   });
+
+ 
 
   
