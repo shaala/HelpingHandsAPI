@@ -78,6 +78,31 @@ module.exports = (router) => {
             }
         });
     });
+// EDIT A USER
+    router.put('/users/:id', (req, res) => {
+        User.findById(req.params.id, (err, user) => {
+            if (!user) {
+                res.send('User not found.');
+            } else if (err) {
+                res.json({ success: false, message: err });
+            } else {
+                // Autofill form with existing data, req.body values CANNOT be blank or user will not save
+                user.email = req.body.email;
+                user.password = req.body.password;
+                user.firstName = req.body.firstName;
+                user.lastName = req.body.lastName;
+                user.zipCode = req.body.zipCode;
+                user.save((err) => {
+                    if (err) {
+                        res.json({ success: false, message: err });
+                    } else {
+                        res.json({ success: true, message: 'User updated!' });
+                    }
+                });
+            }
+        });
+    });
+
     return router;
 }
 
