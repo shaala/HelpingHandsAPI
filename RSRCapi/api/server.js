@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const config = require('./config');
 const bodyParser = require('body-parser');
 const users = require('./routes/users')(router);
-
+const organization = require('./routes/organization')(router);
 const port = process.env.PORT || 8080;
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -44,6 +44,7 @@ app.use('/api', router);
 
 // Get routes from files in app/routes
 app.use('/users', users);
+app.use('/organization', organization);
 
 // START THE SERVER
 app.listen(port, () => {
