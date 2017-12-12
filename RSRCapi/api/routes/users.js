@@ -102,7 +102,24 @@ module.exports = (router) => {
             }
         });
     });
-
+// DELETE A USER
+    router.delete('/users/:id', (req, res) => {
+        User.findById(req.params.id, (err, user) => {
+            if (!user) {
+                res.send('User not found.');
+            } else if (err) {
+                res.json({ success: false, message: err });
+            } else {
+                user.remove((err) => {
+                    if (err) {
+                        res.json({ success: false, message: "something went wrong" });
+                    } else {
+                        res.json({ success: true, message: 'User deleted.' });
+                    }
+                });
+            }
+        });
+    });
     return router;
 }
 
