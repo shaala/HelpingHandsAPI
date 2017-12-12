@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const app = express();
+const cors = require('cors');
 const mongoose = require('mongoose');
 const config = require('./config');
 const bodyParser = require('body-parser');
@@ -22,6 +23,9 @@ mongoose.connect(config.database, (err) => {
   }
 });
 app.set('superSecret', config.secret);
+app.options('*', cors());
+const whitelist = [/http:\/\/localhost(?::\d{1,5})?$/];
+app.use(cors({ origin: whitelist }));
 
 // API ROUTING
 // middleware to use for all requests
