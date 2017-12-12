@@ -55,8 +55,8 @@ module.exports = (router) => {
                 res.json({ success: false, message: err });
             } else {
                 // Autofill form with existing data, req.body values CANNOT be blank or category will not save
-                categoryName: req.body.name;
-                items: req.body.items;
+                category.categoryName = req.body.name;
+                category.items = req.body.items;
                 category.save((err) => {
                     if (err) {
                         res.json({ success: false, message: err });
