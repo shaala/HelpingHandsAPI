@@ -1,4 +1,6 @@
-var AccountController = function (userModel, session, mailer) {
+const mongoose = require('mongoose');
+const User = mongoose.model('User');
+var AccountController = function (User, session, mailer) {
 		this.crypto = require('crypto');
 		this.uuid = require('node-uuid');
 		this.ApiResponse = require('../models/api-response.js');
@@ -26,8 +28,9 @@ AccountController.prototype.hashPassword = function (password, salt, callback) {
 };
 
 AccountController.prototype.logon = function(email, password, callback) {
+    console.log(email, password);
 		var me = this;
-		me.userModel.findOne({ email: email }, function (err, user) {
+		User.findOne({ email: email }, function (err, user) {
 				if (err) {
 						return callback(err, new me.ApiResponse({ success: false, extras: { msg: me.ApiMessages.DB_ERROR } }));
 				}

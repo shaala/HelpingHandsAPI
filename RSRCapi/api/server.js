@@ -4,6 +4,7 @@ const app = express();
 const mongoose = require('mongoose');
 const config = require('./config');
 const bodyParser = require('body-parser');
+const users = require('./routes/users')(router);
 
 const port = process.env.PORT || 8100;
 
@@ -37,9 +38,8 @@ router.get('/', function (req, res) {
 // Prefix routes with /api
 app.use('/api', router);
 
-// var routes = require('./api/routes/doneRoutes'); //importing route
-// routes(app); //register the route
-
+// Get routes from files in app/routes
+app.use('/users', users);
 
 // START THE SERVER
 app.listen(port, () => {
