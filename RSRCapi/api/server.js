@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const app = express();
+const cors = require('cors');
 const mongoose = require('mongoose');
 const config = require('./config');
 const bodyParser = require('body-parser');
@@ -22,6 +23,9 @@ mongoose.connect(config.database, (err) => {
   }
 });
 app.set('superSecret', config.secret);
+app.options('*', cors());
+const whitelist = [/http:\/\/localhost(?::\d{1,5})?$/];
+app.use(cors({ origin: whitelist }));
 
 // API ROUTING
 // middleware to use for all requests
@@ -45,27 +49,5 @@ app.use('/users', users);
 app.listen(port, () => {
   console.log('Listening on port ' + port);
 });
-
-var Org = require('./api/models/org.js');
-
-//organization route
-router.route('/organization');
-
-  //create an organization 
-  app.post(function(req, res) {
-    var org = new Org();
-    org.name = req.body.name;
-
-    //save org and err check
-    org.save(function(err) {
-      if (err)
-          res.send(err);
-
-      res.json({ message: 'organization created!'});
-    });
-    
-  });
-
- 
 
   

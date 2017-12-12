@@ -10,7 +10,7 @@ const OrgSchema = new Schema({
     state: { type: String, required: true },
     zipCode: { type: String, required: true },
     phone: { type: String, required: true },
-    password: { type: String, required: true },
+    password: { type: Number, required: true },
     taxIdNumber: { type: String, required: true },
 });
 
