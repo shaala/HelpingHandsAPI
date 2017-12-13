@@ -148,11 +148,12 @@ module.exports = (router) => {
             org.zipCode = req.body.zipCode,
             org.phone = req.body.phone,
             org.taxIdNumber = req.body.taxIdNumber
+            // NEED TO ADD ORG CATEGORIES HERE
             org.save((err) => {
                 if (err) {
                     res.json({ success: false, message: err });
                 } else {
-                    res.json({ success: true, message: 'Organization updated!' });
+                  res.json({org});
                 }
             });
         }
