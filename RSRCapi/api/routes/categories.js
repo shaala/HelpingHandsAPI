@@ -1,4 +1,5 @@
 const Category = require('../models/category');
+const Org = require('../models/org');
 const config = require('../config');
 
 // ROUTES
