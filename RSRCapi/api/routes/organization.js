@@ -19,56 +19,56 @@ module.exports = (router) => {
     org.categories = [
       { categoryName: "clothes",
         items: [
-          { shirts: 0 }, 
-          { pants: 0 }, 
-          { coats: 0 }, 
-          { underwear: 0 }, 
-          { socks: 0 }, 
-          { shoes: 0 }, 
-          { suits: 0 }
+          { name: "shirts", quantity: 0 }, 
+          { name: "pants", quantity: 0 },
+          { name: "coats", quantity: 0 },
+          { name: "underwear", quantity: 0 },
+          { name: "socks", quantity: 0 },
+          { name: "shoes", quantity: 0 },
+          { name: "suits", quantity: 0 }
         ]}, 
       { categoryName: "baby clothes", 
         items: [
-          { coats: 0 }, 
-          { sleepers: 0 }, 
-          { pants: 0 }, 
-          { shirts: 0 }, 
-          { onesies: 0 }, 
-          { bibs: 0 }
+          { name: "coats", quantity: 0 },
+          { name: "sleepers", quantity: 0 },
+          { name: "pants", quantity: 0 },
+          { name: "shirts", quantity: 0 },
+          { name: "onesies", quantity: 0 },
+          { name: "bibs", quantity: 0 }
         ]}, 
       { categoryName: "baby care", 
         items: [
-          { blankets: 0 }, 
-          { pacifiers: 0 }, 
-          { bottles: 0 }, 
-          { formula: 0 }, 
-          { diapers: 0 }, 
-          { wipes: 0 }
+          { name: "blankets", quantity: 0 },
+          { name: "pacifiers", quantity: 0 },
+          { name: "bottles", quantity: 0 },
+          { name: "formula", quantity: 0 },
+          { name: "diapers", quantity: 0 },
+          { name: "wipes", quantity: 0 }
         ]}, 
       { categoryName: "personal care", 
         items: [
-          { soap: 0 }, 
-          { lotion: 0 }, 
-          { shampoo: 0 }, 
-          { conditioner: 0 }, 
-          { deoderant: 0 }, 
-          { toothpaste: 0 }, 
-          { toothbrushes: 0 }, 
-          { mouthwash: 0 }, 
-          { sunscreen: 0 }, 
-          { razors: 0 }, 
-          { shavingcream: 0 }
+          { name: "soap", quantity: 0 },
+          { name: "lotion", quantity: 0 },
+          { name: "shampoo", quantity: 0 },
+          { name: "conditioner", quantity: 0 },
+          { name: "deoderant", quantity: 0 },
+          { name: "toothpaste", quantity: 0 },
+          { name: "toothbrushes", quantity: 0 },
+          { name: "mouthwash", quantity: 0 },
+          { name: "sunscreen", quantity: 0 },
+          { name: "razors", quantity: 0 },
+          { name: "shavingcream", quantity: 0 }
         ]}, 
       { categoryName: "women clothes", 
         items: [
-          { bras: 0 }, 
-          { skirts: 0 }, 
-          { dresses: 0 }
+          { name: "bras", quantity: 0 },
+          { name: "skirts", quantity: 0 },
+          { name: "dresses", quantity: 0 }
         ]}, 
       { categoryName: "women personal care", 
         items: [
-          { feminine_hygiene: 0 }, 
-          { makeup: 0 }
+          { name: "feminine hygiene", quantity: 0 },
+          { name: "makeup", quantity: 0 }
         ]}
       ]
 
