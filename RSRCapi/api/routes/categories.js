@@ -36,7 +36,6 @@ module.exports = (router) => {
 // ADD CATEGORY
     router.post('/categories/new', (req, res) => {
         const category = new Category({
-            categoryName: req.body.name,
             items: req.body.items
         });
         category.save((err) => {

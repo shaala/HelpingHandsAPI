@@ -3,26 +3,27 @@ const Category = require('../models/category');
 const config = require('../config');
 
 module.exports = (router) => {
-//create new organization with child categories
+  //create new organization
   router.post('/organization/signup', (req, res) => {
-// Create new organization
+    console.log('organization working');
     const org = new Org();
     org.email = req.body.email,
     org.name = req.body.name,
-    org.password = req.body.password,
-    org.address = req.body.address,
-    org.city = req.body.city,
-    org.state = req.body.state,
-    org.zipCode = req.body.zipCode,
-    org.phone = req.body.phone,
-    org.taxIdNumber = req.body.taxIdNumber
-    
-// Save organization
+    // org.password = req.body.password,
+    // org.address = req.body.address,
+    // org.city = req.body.city,
+    // org.state = req.body.state,
+    // org.zipCode = req.body.zipCode,
+    // org.phone = req.body.phone,
+    // org.taxIdNumber = req.body.taxIdNumber
+
+    //save org and err check
     org.save(function (err, org) {
       if (err) {
          res.send(err); 
         }
-// Create new categories
+      res.json(org);
+      console.log('org saved');
       const category = new Category({
         organization: org.name,
         items: [
@@ -81,36 +82,49 @@ module.exports = (router) => {
             ]}
           ]
       });
-// Save new categories
-      category.save((err) => {
-        if (err) {
-          return err;
-        }
-        org.name = org.name,
-        org.password = org.password,
-        org.email = org.email,
-        org.address = org.address,
-        org.city = org.city,
-        org.state = org.state,
-        org.zipCode = org.zipCode,
-        org.phone = org.phone,
-        org.taxIdNumber = org.taxIdNumber,
-        org.categories = category._id
-// Update organization with newly created categories' id
-        org.save((err) => {
+      console.log(category);
+      router.post('/categories/new', (category, res) => {
+        console.log('inside router post categories/new');
+        category.save((err) => {
           if (err) {
-            res.json({ success: false, message: err });
-          } else {
-            Org.findById({ id: org._id })
-              .populate('categories')
-              .exex((err, org) => {
-                if (err) {
-                  res.send(err);
-                }
-                res.json(org);
-              });
+            res.send(err);
+            console.log(err);
           }
+          res.json(category);
+          console.log(category);
+          const data = {
+            orgId: org._id,
+            orgName: org.name,
+            // org.password = org.password,
+            // org.email = org.email,
+            // org.address = org.address,
+            // org.city = org.city,
+            // org.state = org.state,
+            // org.zipCode = org.zipCode,
+            // org.phone = org.phone,
+            // org.taxIdNumber = org.taxIdNumber,
+            orgCategories: category._id            
+          }
+          console.log(data);
+          router.put('/organization/:id', (data, res) => {
+            org.findOne({ _id: data.orgId }, (err, org) => {
+              if (!org) {
+                req.send('Organizaton was not found.');
+              }              
+              org._id = data.orgId;
+              org.name = data.orgName;
+              org.categories = data.orgCategories;
+              org.save((err) => {
+                if (err) {
+                  res.json({ success: false, message: err });
+                } else {
+                  res.json(org);
+                }
+              });
+            });
+          });
         });
+
       });
     });
 
@@ -118,9 +132,7 @@ module.exports = (router) => {
   });
 // organization log in
   router.post('/organization/login', (req, res) => {
-    Org.findOne({ email: req.body.email })
-      .populate('categories')
-      .exec((err, org) => {
+    Org.findOne({ email: req.body.email }, (err, org) => {
       if (!org) {
         res.json({ success: false, message: 'Organization not found.' });
       } else {
@@ -153,9 +165,7 @@ module.exports = (router) => {
   });
   //get one organization
   router.get('/organization/:_id', (req, res) => {
-    Org.findById(req.params._id)
-      .populate('categories')
-      .exec((err, org) => {
+    Org.findById(req.params._id, (err, org) => {
       if (err) {
         res.send(err);
       }
