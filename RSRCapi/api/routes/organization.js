@@ -15,7 +15,8 @@ module.exports = (router) => {
       org.state = req.body.state,
       org.zipCode = req.body.zipCode,
       org.phone = req.body.phone,
-      org.taxIdNumber = req.body.taxIdNumber
+      org.taxIdNumber = req.body.taxIdNumber,
+      org.categories = []
 
     //save org and err check
     org.save(function (err, org) {

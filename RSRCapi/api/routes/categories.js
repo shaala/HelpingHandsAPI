@@ -3,7 +3,7 @@ const config = require('../config');
 
 // ROUTES
 module.exports = (router) => {
-// GET CATEGORIES
+// GET ALL CATEGORIES
     router.get('/categories', (req, res) => {
         Category.find({}, (err, categories) => {
             if (!categories[0]) {
