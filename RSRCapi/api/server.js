@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const config = require('./config');
 const bodyParser = require('body-parser');
 const users = require('./routes/users')(router);
+const organization = require('./routes/organization')(router);
 const categories = require('./routes/categories')(router);
 
 const port = process.env.PORT || 8080;
@@ -35,10 +36,10 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json());
+//app.use(bodyParser.urlencoded({extended: true}));
+//app.use(bodyParser.json());
 
-var routes = require('./api/routes/user_routes');
+//var routes = require('./api/routes/user_routes');
 
 // Test route
 router.get('/', function (req, res) {
@@ -50,6 +51,7 @@ app.use('/api', router);
 
 // Get routes from files in app/routes
 app.use('/users', users);
+app.use('/organization', organization);
 app.use('/categories', categories);
 
 // START THE SERVER
