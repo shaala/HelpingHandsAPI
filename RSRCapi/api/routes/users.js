@@ -6,7 +6,7 @@ module.exports = (router) => {
 // GET ALL USERS
     router.get('/users', (req, res) => {
         User.find({}, (err, users) => {
-            if (!users) {
+            if (!users[0]) {
                 res.json({ success: false, message: 'No users found.' });
             } else {
                 if (err) {
