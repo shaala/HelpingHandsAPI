@@ -67,7 +67,7 @@ module.exports = (router) => {
                                         if (err) {
                                             res.json({ success: false, message: err });
                                         } else {
-                                            res.json({ success: true, message: 'User saved!' });
+                                            res.json({ user });
                                         }
                                     });
                                 }
@@ -96,7 +96,7 @@ module.exports = (router) => {
                     if (err) {
                         res.json({ success: false, message: err });
                     } else {
-                        res.json({ success: true, message: 'User updated!' });
+                        res.json({ user });
                     }
                 });
             }
