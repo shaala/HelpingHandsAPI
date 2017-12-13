@@ -26,18 +26,9 @@ module.exports = (router) => {
         });
         
     });
-// get all organizations
-/*router.get ('/organization', (req,res) => {
-    console.log('all organizations!');
-    Org.find(function(err, org) {
-        if(err)
-           res.send(err);
-        res.json(org);
-    })
-});
-*/
+
 router.get('/organization', (req, res) => {
-    console.log('all organizations');
+    
     Org.find({}, (err, org) => {
         if (!org) {
             res.json({ success: false, message: 'No organizations found.' });
@@ -50,8 +41,17 @@ router.get('/organization', (req, res) => {
         }
     });
 });
+//get an organization
+router.get('/organization/:_id',(req,res) => {
+    Org.findById(req.params._id,(err,org) => {
+        if (err) {
+            res.send(err);
+        }
+        res.json(org);
+    });
+});
 
-router.
+
 return router;
 
 }
