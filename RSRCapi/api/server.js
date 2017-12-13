@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const config = require('./config');
 const bodyParser = require('body-parser');
 const users = require('./routes/users')(router);
+const organization = require('./routes/organization')(router);
 const categories = require('./routes/categories')(router);
 
 const port = process.env.PORT || 8080;
@@ -45,9 +46,12 @@ app.use('/api', router);
 
 // Get routes from files in app/routes
 app.use('/users', users);
+app.use('/organization', organization);
 app.use('/categories', categories);
 
 // START THE SERVER
 app.listen(port, () => {
   console.log('Listening on port ' + port);
 });
+
+  
