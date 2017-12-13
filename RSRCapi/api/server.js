@@ -36,6 +36,11 @@ app.use(function (req, res, next) {
   next();
 });
 
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+
+var routes = require('./api/routes/user_routes');
+
 // Test route
 router.get('/', function (req, res) {
   res.json({ message: 'api works!' });
