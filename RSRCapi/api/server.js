@@ -6,17 +6,9 @@ const mongoose = require('mongoose');
 const config = require('./config');
 const bodyParser = require('body-parser');
 const users = require('./routes/users')(router);
-<<<<<<< HEAD
 const organization = require('./routes/organization')(router);
-<<<<<<< HEAD
 const categories = require('./routes/categories')(router);
 
-=======
-=======
-const categories = require('./routes/categories')(router);
-
->>>>>>> 954d388f2e88175fff567675df429b2c46592ea4
->>>>>>> 59fcd88d42da74dd2ccc3c872a70b3814c0ab11b
 const port = process.env.PORT || 8080;
 
 app.use(bodyParser.urlencoded({ extended: true }));
