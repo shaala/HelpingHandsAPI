@@ -1,6 +1,7 @@
 'use strict';
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+// const categorySchema = require('./category');
 
 const OrgSchema = new Schema({
     email: { type: String, required: true, unique: true },
@@ -12,6 +13,7 @@ const OrgSchema = new Schema({
     phone: { type: String, required: true },
     password: { type: String, required: true },
     taxIdNumber: { type: String, required: true },
+    // categories: [categorySchema]
 });
 
 module.exports = mongoose.model('Org', OrgSchema);

@@ -15,7 +15,8 @@ module.exports = (router) => {
       org.state = req.body.state,
       org.zipCode = req.body.zipCode,
       org.phone = req.body.phone,
-      org.taxIdNumber = req.body.taxIdNumber
+      org.taxIdNumber = req.body.taxIdNumber,
+      org.categories = []
 
     //save org and err check
     org.save(function (err, org) {
@@ -28,7 +29,25 @@ module.exports = (router) => {
     });
 
   });
-
+// organization log in
+  router.post('/organization/login', (req, res) => {
+    Org.findOne({ email: req.body.email }, (err, org) => {
+      if (!org) {
+        res.json({ success: false, message: 'Organization not found.' });
+      } else {
+        if (org.password !== req.body.password) {
+          res.json({ success: false, message: 'Invalid login credentials.' });
+        } else {
+          if (err) {
+            res.json({ success: false, message: err });
+          } else {
+            res.json({ success: true, org });
+          }
+        }
+      }
+    });
+  });
+//  get all orgs
   router.get('/organization', (req, res) => {
 
     Org.find({}, (err, org) => {
@@ -51,7 +70,7 @@ module.exports = (router) => {
       }
     });
   });
-  //get an organization
+  //get one organization
   router.get('/organization/:_id', (req, res) => {
     Org.findById(req.params._id, (err, org) => {
       if (err) {

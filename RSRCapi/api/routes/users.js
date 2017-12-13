@@ -29,7 +29,7 @@ module.exports = (router) => {
                     if (err) {
                         res.json({ success: false, message: err });
                     } else {
-                        res.json({ success: true, message: 'Logged in!' });
+                        res.json({ success: true, user });
                     }
                 }
             }
@@ -122,9 +122,3 @@ module.exports = (router) => {
     });
     return router;
 }
-
-// in the front end:
-// this.api.put('user/id/${this.user.id}', this.user)
-//     .then((res) => {
-
-//     })
