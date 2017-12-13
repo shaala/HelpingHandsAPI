@@ -12,14 +12,50 @@ var AccountController = function (userModel, session, mailer) {
 
 module.exports = AccountController;
 
-exports.userList = function(req, User.find({}, function(err, task){
+exports.read_all_users = function(req, User.find({}, function(err, task){
 		if (err)
 			res.send(err);
+		res.send({type: GET});
 		res.json(user);
 	});
 };
 
-//TODO exports.create_user = 
+exports.create_user = function(req, res) {
+	var newUser = new User(req.body);
+	newUser.save(function(err, user) {
+		if (err)
+			res.send(err);
+		res.send({type: POST});
+		res.json(user);
+	});
+};
+
+exports.read_user = function(req, res) {
+	User.findById(req.params.userId, function(err, task) {
+		if (err)
+			res.send(err);
+		res.send({type: GET});
+		res.json(user);
+	});
+};
+
+exports.update_user = function(req, res) {
+	User.findOneAndUpdate({_id: req.params.userId}, req.body, {new: true}, function(err, task) {
+		if (err)
+			res.send(err);
+		res.send({type: PUT});
+		res.json(user);
+	});
+};
+
+exports.delete_user = function(req, res) {
+	User.remove({_id: req.params.userId}, function(err, task) {
+		if (err)
+			res.send(err);
+		res.send({type: DELETE});
+		res.json(message: 'User was succesfully deleted'});
+	});
+};
 
 AccountController.prototype.getSession = function () {
 		return this.session;
